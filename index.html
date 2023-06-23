@@ -1,273 +1,150 @@
+<!DOCTYPE html>
 <html>
-
 <head>
-    <title>Academic CV</title>
-    <link rel="stylesheet" href="https://fonts.googleapis.com/icon?family=Material+Icons">
-    <style>
-        body {
-            font-family: Arial, sans-serif;
-            background-color: #f0f8ff;
-            margin: 0;
-            padding: 0;
-        }
+  <title>بطاقة الصداقة</title>
+  <style>
+    body {
+      background-color: #92c5de;
+      background-image: linear-gradient(120deg, #f6d365 0%, #fda085 100%);
+      font-family: Arial, sans-serif;
+      display: flex;
+      justify-content: center;
+      align-items: center;
+      height: 100vh;
+    }
 
-        .container {
-            max-width: 800px;
-            margin: 0 auto;
-            padding: 20px;
-        }
+    .card {
+      width: 400px;
+      background-color: #fff;
+      border-radius: 8px;
+      padding: 20px;
+      box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+      opacity: 0;
+      animation: enterAnimation 1s forwards;
+    }
 
-        .header {
-            display: flex;
-            align-items: center;
-            border-bottom: 1px solid #ccc;
-        }
+    .card-header {
+      text-align: center;
+      margin-bottom: 20px;
+    }
 
-        .photo {
-            width: 100px;
-            height: 100px;
-            border-radius: 50%;
-            object-fit: cover;
-        }
+    .card-header h2 {
+      color: #333;
+      font-size: 24px;
+      margin-bottom: 10px;
+    }
 
-        .name {
-            font-size: 24px;
-            font-weight: bold;
-            margin-left: 20px;
-        }
+    .card-content {
+      color: #555;
+      line-height: 1.5;
+      text-align: right;
+    }
 
-        .section {
-            margin-top: 20px;
-        }
+    .card-content p {
+      margin-bottom: 10px;
+    }
 
-        .section-title {
-            font-size: 18px;
-            font-weight: bold;
-            color: #4682b4;
-        }
+    .card-content img {
+      display: block;
+      margin: 0 auto;
+      border-radius: 50%;
+      width: 150px;
+      height: 150px;
+      object-fit: cover;
+    }
 
-        .section-content {
-            margin-left: 20px;
-        }
+    .highlight {
+      font-weight: bold;
+      color: #ff6961;
+    }
 
-        .item {
-            margin-top: 10px;
-        }
+    .sun {
+      width: 80px;
+      height: 80px;
+      background-color: #f8e352;
+      border-radius: 50%;
+      position: absolute;
+      top: -40px;
+      right: -40px;
+      opacity: 0;
+      transform: scale(0);
+      animation: sunAnimation 1s forwards;
+    }
 
-        .item-title {
-            font-size: 16px;
-            font-weight: bold;
-        }
+    .sea {
+      width: 100%;
+      height: 120px;
+      background-color: #3da9d6;
+      position: absolute;
+      bottom: 0;
+      left: 0;
+      opacity: 0;
+      animation: seaAnimation 1s forwards;
+    }
 
-        .item-subtitle {
-            font-size: 14px;
-            color: #808080;
-        }
+    @keyframes enterAnimation {
+      0% {
+        opacity: 0;
+        transform: translateY(20px);
+      }
+      100% {
+        opacity: 1;
+        transform: translateY(0);
+      }
+    }
 
-        .item-description {
-            font-size: 14px;
-        }
+    @keyframes sunAnimation {
+      0% {
+        opacity: 0;
+        transform: scale(0);
+      }
+      100% {
+        opacity: 1;
+        transform: scale(1);
+      }
+    }
 
-        .icon {
-            color: #4682b4;
-            margin-right: 5px;
-        }
-    </style>
+    @keyframes seaAnimation {
+      0% {
+        opacity: 0;
+        transform: translateY(20px);
+      }
+      100% {
+        opacity: 1;
+        transform: translateY(0);
+      }
+    }
+  </style>
+  <script>
+    window.onload = function() {
+      const card = document.querySelector('.card');
+      const sun = document.querySelector('.sun');
+      const sea = document.querySelector('.sea');
+
+      card.style.animationDelay = '0s';
+      sun.style.animationDelay = '0.5s';
+      sea.style.animationDelay = '0.5s';
+    };
+  </script>
 </head>
-
 <body>
-    <div class="container">
-        <div class="header">
-            <img src="https://images.unsplash.com/photo-1528892952291-009c663ce843?ixlib=rb-4.0.3&ixid=MnwxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8&auto=format&fit=crop&w=644&q=80" alt="Photo" class="photo">
-            <div class="name" id="name"></div>
-        </div>
-        <div class="section">
-            <div class="section-title"><span class="material-icons icon">email</span>Email</div>
-            <div class="section-content" id="email"></div>
-        </div>
-        <div class="section">
-            <div class="section-title"><span class="material-icons icon">phone</span>Phone</div>
-            <div class="section-content" id="phone"></div>
-        </div>
-        <div class="section">
-            <div class="section-title"><span class="material-icons icon">school</span>Education</div>
-            <div class="section-content" id="education"></div>
-        </div>
-        <div class="section">
-            <div class="section-title"><span class="material-icons icon">work</span>Work Experience</div>
-            <div class="section-content" id="work"></div>
-        </div>
-        <div class="section">
-            <div class="section-title"><span class="material-icons icon">book</span>Publications</div>
-            <div class="section-content" id="publications"></div>
-        </div>
-        <div class="section">
-            <div class="section-title"><span class="material-icons icon">star</span>Awards and Honors</div>
-            <div class="section-content" id="awards"></div>
-        </div>
+  <div class="card">
+    <div class="card-header">
+      <h2>إلى صديقى العزيز</h2>
     </div>
-
-    <script>
-        // Sample JSON data
-   var data = {
-     "name": "John Doe",
-     "email": "johndoe@example.com",
-     "phone": "+1 (123) 456-7890",
-     "education": [
-       {
-         "title": "Ph.D. in Computer Science",
-         "subtitle": "University of ABC, 2019 - Present",
-         "description": "Thesis topic: Machine Learning for Natural Language Processing"
-       },
-       {
-         "title": "M.Sc. in Computer Science",
-         "subtitle": "University of XYZ, 2017 - 2019",
-         "description": "GPA: 3.9/4.0"
-       },
-       {
-         "title": "B.Sc. in Computer Science",
-         "subtitle": "University of LMN, 2013 - 2017",
-         "description": "GPA: 3.8/4.0"
-       }
-     ],
-     "work": [
-       {
-         "title": "Research Assistant",
-         "subtitle": "University of ABC, Jan 2020 - Present",
-         "description": "Conducting research on natural language processing and machine learning under the supervision of Prof. Smith."
-       },
-       {
-         "title": "Software Engineer Intern",
-         "subtitle": "Google, Jun 2018 - Aug 2018",
-         "description": "Developed a web application for sentiment analysis using Python and TensorFlow."
-       }
-     ],
-     "publications": [
-       {
-         "title": "A Novel Approach for Sentiment Analysis using Deep Learning",
-         "subtitle": "Proceedings of the 25th International Conference on Artificial Intelligence (IJCAI), 2021",
-         "description": "We propose a novel approach for sentiment analysis using deep learning that outperforms existing methods on several benchmarks."
-       },
-       {
-         "title": "A Survey on Machine Learning for Natural Language Processing",
-         "subtitle": "Journal of Artificial Intelligence Research (JAIR), 2020",
-         "description": "We provide a comprehensive survey on machine learning techniques for natural language processing, covering various tasks and applications."
-       }
-     ],
-     "awards": [
-       {
-         "title": "Best Paper Award",
-         "subtitle": "IJCAI 2021",
-          "description": "Awarded for the paper \"A Novel Approach for Sentiment Analysis using Deep Learning\"."
-       },
-       {
-         "title": "Outstanding Graduate Student Award",
-         "subtitle": "University of XYZ, 2019",
-         "description": "Awarded for academic excellence and research contributions."
-       }
-     ]
-   };
-
-   // Function to populate the HTML elements with JSON data
-   function populateData() {
-     // Get the HTML elements by id
-     var nameElement = document.getElementById("name");
-     var emailElement = document.getElementById("email");
-     var phoneElement = document.getElementById("phone");
-     var educationElement = document.getElementById("education");
-     var workElement = document.getElementById("work");
-     var publicationsElement = document.getElementById("publications");
-     var awardsElement = document.getElementById("awards");
-
-     // Set the innerHTML of the elements with JSON data
-     nameElement.innerHTML = data.name;
-     emailElement.innerHTML = data.email;
-     phoneElement.innerHTML = data.phone;
-
-     // Loop through the education array and create HTML elements for each item
-     for (var i = 0; i < data.education.length; i++) {
-       var item = data.education[i];
-       var itemElement = document.createElement("div");
-       itemElement.className = "item";
-       var itemTitle = document.createElement("div");
-       itemTitle.className = "item-title";
-       itemTitle.innerHTML = item.title;
-       var itemSubtitle = document.createElement("div");
-       itemSubtitle.className = "item-subtitle";
-       itemSubtitle.innerHTML = item.subtitle;
-       var itemDescription = document.createElement("div");
-       itemDescription.className = "item-description";
-       itemDescription.innerHTML = item.description;
-       itemElement.appendChild(itemTitle);
-       itemElement.appendChild(itemSubtitle);
-       itemElement.appendChild(itemDescription);
-       educationElement.appendChild(itemElement);
-     }
-
-     // Loop through the work array and create HTML elements for each item
-     for (var i = 0; i < data.work.length; i++) {
-       var item = data.work[i];
-       var itemElement = document.createElement("div");
-       itemElement.className = "item";
-       var itemTitle = document.createElement("div");
-       itemTitle.className = "item-title";
-       itemTitle.innerHTML = item.title;
-       var itemSubtitle = document.createElement("div");
-       itemSubtitle.className = "item-subtitle";
-       itemSubtitle.innerHTML = item.subtitle;
-       var itemDescription = document.createElement("div");
-       itemDescription.className = "item-description";
-       itemDescription.innerHTML = item.description;
-       itemElement.appendChild(itemTitle);
-       itemElement.appendChild(itemSubtitle);
-       itemElement.appendChild(itemDescription);
-       workElement.appendChild(itemElement);
-     }
-
-     // Loop through the publications array and create HTML elements for each item
-     for (var i = 0; i < data.publications.length; i++) { var item = data.publications[i];
-       var itemElement = document.createElement("div");
-       itemElement.className = "item";
-       var itemTitle = document.createElement("div");
-       itemTitle.className = "item-title";
-       itemTitle.innerHTML = item.title;
-       var itemSubtitle = document.createElement("div");
-       itemSubtitle.className = "item-subtitle";
-       itemSubtitle.innerHTML = item.subtitle;
-       var itemDescription = document.createElement("div");
-       itemDescription.className = "item-description";
-       itemDescription.innerHTML = item.description;
-       itemElement.appendChild(itemTitle);
-       itemElement.appendChild(itemSubtitle);
-       itemElement.appendChild(itemDescription);
-       publicationsElement.appendChild(itemElement);
-     }
-
-     // Loop through the awards array and create HTML elements for each item
-     for (var i = 0; i < data.awards.length; i++) {
-       var item = data.awards[i];
-       var itemElement = document.createElement("div");
-       itemElement.className = "item";
-       var itemTitle = document.createElement("div");
-       itemTitle.className = "item-title";
-       itemTitle.innerHTML = item.title;
-       var itemSubtitle = document.createElement("div");
-       itemSubtitle.className = "item-subtitle";
-       itemSubtitle.innerHTML = item.subtitle;
-       var itemDescription = document.createElement("div");
-       itemDescription.className = "item-description";
-       itemDescription.innerHTML = item.description;
-       itemElement.appendChild(itemTitle);
-       itemElement.appendChild(itemSubtitle);
-       itemElement.appendChild(itemDescription);
-       awardsElement.appendChild(itemElement);
-     }
-   }
-
-   // Call the populateData function when the window loads
-   window.onload = populateData;
-
-    </script>
+    <div class="card-content">
+      <img src="https://iili.io/HPhcd57.jpg" alt="صورة الملف الشخصي">
+      <p>عزيزي <span class="highlight">لطفى</span>,</p>
+      <p>في هذه المناسبة الخاصة، نود أن نحتفل بصداقتنا وأن نخبرك بمدى أهميتك بالنسبة لنا.</p>
+      <p>شكرًا لك على أنك دائمًا موجود ومدعم لنا، وعلى صنع كل لحظة لا تُنسى.</p>
+      <p>نتمنى لك المزيد من المغامرات والذكريات الرائعة معًا!</p>
+      <p>مع تحياتى</p>
+      <p>صديقك</p>
+      <p class="highlight">أحمد عمرو</p>
+      
+    </div>
+  </div>
+  <div class="sun"></div>
+  <div class="sea"></div>
 </body>
-
 </html>
